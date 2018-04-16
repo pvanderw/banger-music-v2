@@ -135,7 +135,12 @@ STATICFILES_FINDERS = [
 
 ADMINS = list(zip(env.list('ADMIN_NAMES'), env.list('ADMIN_EMAILS')))
 
-
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': str(ROOT_DIR.path('webpack-stats.json')),
+    }
+}
 
 
 
