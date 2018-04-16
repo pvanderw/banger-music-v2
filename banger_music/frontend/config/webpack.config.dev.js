@@ -22,6 +22,8 @@ const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
+var BundleTracker  = require('webpack-bundle-tracker');
+
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
 // The production configuration is different and lives in a separate file.
@@ -211,6 +213,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new BundleTracker({path: "../", filename: 'webpack-stats.json'}),
+
+
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
