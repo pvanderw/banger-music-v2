@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Apps
+    'backend.accounts',
+
+    # Third Party Packages
     'rest_framework',
     'djoser',
     'webpack_loader',
