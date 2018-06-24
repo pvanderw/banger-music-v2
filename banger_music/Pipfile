@@ -10,6 +10,7 @@ django-environ = "*"
 "psycopg2" = "*"
 django-webpack-loader = "*"
 django-cors-headers = "*"
+djangorestframework-jwt = "*"
 
 [dev-packages]
 
