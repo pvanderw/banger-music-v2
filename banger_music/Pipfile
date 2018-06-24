@@ -11,6 +11,7 @@ django-environ = "*"
 django-webpack-loader = "*"
 django-cors-headers = "*"
 djangorestframework-jwt = "*"
+djoser = "*"
 
 [dev-packages]
 
