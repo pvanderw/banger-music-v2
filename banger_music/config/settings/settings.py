@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import environ
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Apps
+    'backend.banger_music',
     'backend.accounts',
 
     # Third Party Packages
@@ -170,6 +172,11 @@ DJOSER = {
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'TOKEN_MODEL': None,
+}
+
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=15),
+    'JWT_GET_USER_SECRET_KEY': 'backend.accounts.models.jwt_get_secret_key',
 }
 
 
