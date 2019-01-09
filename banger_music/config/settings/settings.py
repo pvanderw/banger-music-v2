@@ -179,5 +179,9 @@ JWT_AUTH = {
     'JWT_GET_USER_SECRET_KEY': 'backend.accounts.models.jwt_get_secret_key',
 }
 
+CORS_ORIGIN_WHITELIST = {
+    'localhost:3000/'
+}
+
 
 

@@ -6,7 +6,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-
 def jwt_get_secret_key(user_model):
 	return user_model.userprofile.jwt_secret
 
