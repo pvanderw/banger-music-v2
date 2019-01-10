@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "djoser",
     "webpack_loader",
     "corsheaders",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 TEMPLATES = [
@@ -155,7 +157,7 @@ REST_FRAMEWORK = {
 DJOSER = {
     "PASSWORD_RESET_CONFIRM_URL": "#/password/reset/confirm/{uid}/{token}",
     "ACTIVATION_URL": "#/activate/{uid}/{token}",
-    "SEND_ACTIVATION_EMAIL": True,
+    "SEND_ACTIVATION_EMAIL": False,
     "TOKEN_MODEL": None,
 }
 
@@ -164,4 +166,4 @@ JWT_AUTH = {
     "JWT_GET_USER_SECRET_KEY": "backend.accounts.models.jwt_get_secret_key",
 }
 
-CORS_ORIGIN_WHITELIST = {"localhost:3000/"}
+CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST")
