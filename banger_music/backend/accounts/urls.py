@@ -8,7 +8,11 @@ urlpatterns = [
         "auth/",
         include(
             [
-                path("user/view/", djoser_views.UserView.as_view(), name="user_view"),
+                path(
+                    "user/view/",
+                    djoser_views.UserView.as_view(),
+                    name="user_view"
+                ),
                 path(
                     "user/delete/",
                     djoser_views.UserDeleteView.as_view(),

@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
     # Apps
-    "backend.banger_music",
     "backend.accounts",
+    "backend.banger_music",
+    "backend.blog",
+    
     # Third Party Packages
     "rest_framework",
     "djoser",
