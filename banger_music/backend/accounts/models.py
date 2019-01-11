@@ -5,12 +5,14 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from backend.banger_music.models import UUIDModel
+
 
 def jwt_get_secret_key(user_model):
 	return user_model.userprofile.jwt_secret
 
 
-class UserProfile(models.Model):
+class UserProfile(UUIDModel):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	bio = models.CharField(max_length=500, blank=True)
 	time_zone = models.CharField(max_length=100, default='America/Los_Angeles')
