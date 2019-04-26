@@ -1,7 +1,7 @@
 from django.urls import include, path, re_path
 from djoser import views as djoser_views
 from rest_framework_jwt import views as jwt_views
-from backend.accounts import views as views
+from accounts import views as views
 
 urlpatterns = [
     path(

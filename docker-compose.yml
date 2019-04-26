@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  django:
+    build: ./backend
+    command: python /usr/src/banger_music/backend/manage.py runserver 0.0.0.0:8000
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend/:/usr/src/banger_music/backend/
+    ports:
+      - 8000:8000
+    depends_on:
+      - postgres
+      - frontend
+
+  frontend:
+    build: ./frontend
+    command: ["npm", "start"]
+    volumes:
+      - ./frontend:/user/src/banger_music/frontend
+      - node-modules:/user/src/banger_music/frontend/node_modules
+    ports:
+      - "3000:3000"
+
+  postgres:
+    image: postgres:10.5-alpine
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
+      - ./data/postgres_data:/var/lib/postgresql/data/
+
+volumes:
+  postgres_data:
+  node-modules:

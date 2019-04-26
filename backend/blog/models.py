@@ -1,6 +1,6 @@
 from django.db import models
-from backend.accounts.models import UserProfile
-from backend.banger_music.models import UUIDModel
+from accounts.models import UserProfile
+from banger_music.models import UUIDModel
 
 
 class Blog(UUIDModel):

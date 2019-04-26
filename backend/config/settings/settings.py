@@ -15,12 +15,10 @@ import environ
 import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ROOT_DIR = environ.Path(__file__) - 3
-APPS_DIR = ROOT_DIR.path("banger_music")
+BASE_DIR = environ.Path(__file__) - 3
 
 env = environ.Env(DEBUG=(bool, False))
-environ.Env.read_env(str(ROOT_DIR.path(".env")))
+environ.Env.read_env(str(BASE_DIR.path(".env")))
 
 DEBUG = env("DEBUG")
 
@@ -41,9 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     
     # Apps
-    "backend.accounts",
-    "backend.banger_music",
-    "backend.blog",
+    "accounts",
+    "banger_music",
+    "blog",
     
     # Third Party Packages
     "rest_framework",
@@ -69,7 +67,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(APPS_DIR.path("templates"))],
+        "DIRS": [str(BASE_DIR.path("templates"))],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -130,9 +128,9 @@ USE_TZ = True
 
 # Static Files
 # -----------------------------------------------------------------------------------
-STATIC_ROOT = str(ROOT_DIR("staticfiles"))
+STATIC_ROOT = str(BASE_DIR("staticfiles"))
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [str(APPS_DIR.path("static"))]
+STATICFILES_DIRS = [str(BASE_DIR.path("static"))]
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -144,7 +142,7 @@ ADMINS = list(zip(env.list("ADMIN_NAMES"), env.list("ADMIN_EMAILS")))
 WEBPACK_LOADER = {
     "DEFAULT": {
         "BUNDLE_DIR_NAME": "bundles/",
-        "STATS_FILE": str(ROOT_DIR.path("webpack-stats.json")),
+        "STATS_FILE": str(BASE_DIR.path("webpack-stats.json")),
     }
 }
 
@@ -166,7 +164,7 @@ DJOSER = {
 
 JWT_AUTH = {
     "JWT_EXPIRATION_DELTA": datetime.timedelta(minutes=15),
-    "JWT_GET_USER_SECRET_KEY": "backend.accounts.models.jwt_get_secret_key",
+    "JWT_GET_USER_SECRET_KEY": "accounts.models.jwt_get_secret_key",
 }
 
 CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST")
