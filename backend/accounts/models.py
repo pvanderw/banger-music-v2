@@ -19,7 +19,7 @@ class UserProfile(UUIDModel):
 	jwt_secret = models.UUIDField(default=uuid.uuid4)
 
 	def __str__(self):
-		return "{} {}".format(self.user.first_name, self.user.last_name)
+		return f"{self.user.first_name} {self.user.last_name}"
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

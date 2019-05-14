@@ -13,7 +13,7 @@ class Blog(UUIDModel):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "{} - {}".format(self.author, self.title)
+        return f"{self.author} - {self.title}"
 
 
 class Post(UUIDModel):
@@ -30,7 +30,7 @@ class Post(UUIDModel):
     date_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "{}: {}".format(self.title, self.date_created)
+        return f"{self.title}: {self.date_created}"
 
 
 class Comment(UUIDModel):
@@ -46,4 +46,4 @@ class Comment(UUIDModel):
     date_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "{}: {}".format(self.author, self.date_created)
+        return f"{self.author}: {self.date_created}"
