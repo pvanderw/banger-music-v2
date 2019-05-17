@@ -92,6 +92,7 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "react-router-dom": "^5.0.0",
     "webpack-bundle-tracker": "^0.3.0"
   }
 }

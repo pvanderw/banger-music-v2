@@ -16,10 +16,11 @@ services:
 
   frontend:
     build: ./frontend
-    command: ["npm", "start"]
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
     volumes:
-      - ./frontend:/user/src/banger_music/frontend
-      - node-modules:/user/src/banger_music/frontend/node_modules
+      - ./frontend:/usr/src/banger_music/frontend
     ports:
       - "3000:3000"
 
@@ -36,4 +37,3 @@ services:
 
 volumes:
   postgres_data:
-  node-modules:
