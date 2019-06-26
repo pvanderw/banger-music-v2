@@ -149,10 +149,14 @@ WEBPACK_LOADER = {
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
         # 'rest_framework.authentication.SessionAuthentication',
         # 'rest_framework.authentication.BasicAuthentication',
     ),
+}
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
 }
 
 DJOSER = {
@@ -160,11 +164,6 @@ DJOSER = {
     "ACTIVATION_URL": "#/activate/{uid}/{token}",
     "SEND_ACTIVATION_EMAIL": False,
     "TOKEN_MODEL": None,
-}
-
-JWT_AUTH = {
-    "JWT_EXPIRATION_DELTA": datetime.timedelta(minutes=15),
-    "JWT_GET_USER_SECRET_KEY": "accounts.models.jwt_get_secret_key",
 }
 
 CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST")

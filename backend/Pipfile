@@ -9,9 +9,9 @@ djangorestframework = "*"
 django-environ = "*"
 django-webpack-loader = "*"
 django-cors-headers = "*"
-djangorestframework-jwt = "*"
 djoser = "*"
 django-debug-toolbar = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 
