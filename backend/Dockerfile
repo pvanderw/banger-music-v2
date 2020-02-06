@@ -1,25 +1,21 @@
 # pull official base image
-FROM python:3.6-alpine
+FROM python:3.8-alpine
+
+# set work directory
+WORKDIR /usr/src/banger_music/backend
 
 # set environment varibles
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# set work directory
-WORKDIR /usr/src/banger_music/backend
-
-# install psycopg2
+# install psycopg2 dependencies
 RUN apk update \
-    && apk add --virtual build-deps gcc python3-dev musl-dev \
-    && apk add postgresql-dev \
-    && pip install psycopg2 \
-    && apk del build-deps
+    && apk add postgresql-dev gcc python3-dev musl-dev
 
 # install dependencies
 RUN pip install --upgrade pip
-RUN pip install pipenv
-COPY ./Pipfile /usr/src/banger_music/backend/Pipfile
-RUN pipenv install --skip-lock --system --dev
+COPY ./requirements.txt /usr/src/banger_music/backend/requirements.txt
+RUN pip install -r requirements.txt
 
 # copy entrypoint.sh
 COPY ./entrypoint.sh /usr/src/banger_music/backend/entrypoint.sh
