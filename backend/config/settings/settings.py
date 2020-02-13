@@ -21,9 +21,8 @@ env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env(str(BASE_DIR.path(".env")))
 
 DEBUG = env("DEBUG")
-
+ENVIRONMENT = env("ENVIRONMENT")
 SECRET_KEY = env("SECRET_KEY")
-
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 SITE_ID = 1
@@ -156,7 +155,20 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=10),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    'AUTH_HEADER_TYPES': ('JWT',),
+    # Cookie name. Enables cookies if value is set.
+    'AUTH_COOKIE': 'JWT',
+    # A string like "example.com", or None for standard domain cookie.
+    'AUTH_COOKIE_DOMAIN': None,
+    # Whether the auth cookies should be secure (https:// only).
+    'AUTH_COOKIE_SECURE': False,
+    # The path of the auth cookie.
+    'AUTH_COOKIE_PATH': '/',
+    # Whether to set the flag restricting cookie leaks on cross-site requests.
+    # This can be 'Lax', 'Strict', or None to disable the flag.
+    'AUTH_COOKIE_SAMESITE': 'Lax',
 }
 
 DJOSER = {
@@ -166,4 +178,6 @@ DJOSER = {
     "TOKEN_MODEL": None,
 }
 
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST")

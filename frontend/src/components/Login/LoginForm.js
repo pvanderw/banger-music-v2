@@ -32,28 +32,32 @@ class LoginForm extends Component {
       'username': this.state.email,
       'password': this.state.password,
     });
-    return fetch('http://localhost:8000/api/auth/jwt/create/', {
+    return fetch('http://localhost:8000/api/auth/login/', {
         method: 'POST',
         headers: headers,
-        body: body
+        body: body,
+        credentials: 'include',
       })
       .then(response => {
         return response.json();
       })
       .then(jsonResponse => {
+        console.log(jsonResponse);
         const error = jsonResponse.detail;
         if (error !== undefined) {
           this.setState({"errors": error});
         }
         else {
-          const accessToken = jsonResponse.access;
-          window.localStorage.setItem('JWT', accessToken);
-          headers = {
-            'Content-Type': 'application/json',
-            'Authentication': `JWT ${accessToken}`,
-            'credentials': 'include',
-          };
-          this.props.history.push('/users/me/');
+          // const accessToken = jsonResponse.access;
+          // fetch('http://localhost:8000/api/auth/users/me/', { 
+          //   method: 'get', 
+          //   headers: new Headers({
+          //     'Authorization': `JWT ${accessToken}`, 
+          //     'Content-Type': 'application/json',
+          //   }),
+          // })
+          // window.localStorage.setItem('JWT', accessToken);
+          this.props.history.push('/account/');
         }
       })
       .catch(error => {
