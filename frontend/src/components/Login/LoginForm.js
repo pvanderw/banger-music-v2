@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 
 class LoginForm extends Component {
@@ -48,15 +48,6 @@ class LoginForm extends Component {
           this.setState({"errors": error});
         }
         else {
-          // const accessToken = jsonResponse.access;
-          // fetch('http://localhost:8000/api/auth/users/me/', { 
-          //   method: 'get', 
-          //   headers: new Headers({
-          //     'Authorization': `JWT ${accessToken}`, 
-          //     'Content-Type': 'application/json',
-          //   }),
-          // })
-          // window.localStorage.setItem('JWT', accessToken);
           this.props.history.push('/account/');
         }
       })

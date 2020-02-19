@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Home from './components/Home';
 import LoginForm from './components/Login/LoginForm';
 import UserDetail from './components/User/UserDetail';
-import Navbar from 'react-bootstrap/Navbar'
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 
 class App extends Component {
