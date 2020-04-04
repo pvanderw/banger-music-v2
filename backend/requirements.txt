@@ -5,7 +5,7 @@ django-environ==0.4.5
 django-templated-mail==1.1.1
 django-webpack-loader==0.6.0
 djangorestframework==3.11.0
-git+http://github.com/NiyazNz/django-rest-framework-simplejwt@jwt_cookie#egg=djangorestframework-simplejwt
+-e git+git@github.com:pvanderw/banger-music-v2.git@b2b82ba2db21f0eb0b09286a92a322fd8275983d#egg=djangorestframework_simplejwt
 djoser==2.0.3
 psycopg2-binary==2.8.4
 PyJWT==1.7.1
