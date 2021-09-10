@@ -1,31 +1,46 @@
 import React, { Component } from 'react';
 import Home from './components/Home';
 import LoginForm from './components/Login/LoginForm';
+import SignupForm from './components/Signup/SignupForm';
 import UserDetail from './components/User/UserDetail';
-import Navbar from 'react-bootstrap/Navbar';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import CustomNav from './components/Navbar/CustomNav';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from './redux/actions/auth';
+import axios from 'axios';
 
+axios.defaults.baseURL = 'http://localhost:8000/';
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.onTryAutoSignup();
+  }
+
   render() {
     return (
       <BrowserRouter>
-        <Navbar bg="dark">
-          <Navbar.Brand>
-            <Link to="/" className="text-white">Banger Music</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            <Link to="/login/" className="text-white">Login</Link>
-          </Navbar.Collapse>
-        </Navbar>
+        <CustomNav {...this.props} />
 
         <Route path="/" exact component={Home} />
         <Route path="/login/" component={LoginForm} />
+        <Route path="/signup/" component={SignupForm} />
         <Route path="/account/" component={UserDetail} />
       </BrowserRouter>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.token !== null
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onTryAutoSignup: () => dispatch(actions.authCheckState())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

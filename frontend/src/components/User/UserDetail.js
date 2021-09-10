@@ -10,7 +10,7 @@ class UserDetail extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8000/api/auth/users/me/', { 
+    fetch('api/auth/users/me/', { 
       method: 'get', 
       headers: new Headers({
         'Content-Type': 'application/json',

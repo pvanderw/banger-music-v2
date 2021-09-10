@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     
     # Third Party Packages
     "rest_framework",
-    "djoser",
     "webpack_loader",
     "corsheaders",
     "debug_toolbar",
@@ -169,13 +168,6 @@ SIMPLE_JWT = {
     # Whether to set the flag restricting cookie leaks on cross-site requests.
     # This can be 'Lax', 'Strict', or None to disable the flag.
     'AUTH_COOKIE_SAMESITE': 'Lax',
-}
-
-DJOSER = {
-    "PASSWORD_RESET_CONFIRM_URL": "#/password/reset/confirm/{uid}/{token}",
-    "ACTIVATION_URL": "#/activate/{uid}/{token}",
-    "SEND_ACTIVATION_EMAIL": False,
-    "TOKEN_MODEL": None,
 }
 
 CORS_ORIGIN_ALLOW_ALL = False
