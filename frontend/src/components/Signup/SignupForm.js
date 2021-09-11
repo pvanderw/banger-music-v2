@@ -71,7 +71,7 @@ class SignupForm extends Component {
   
   render() {
     return (
-      <div className="container w-50 mt-5 shadow p-3 mb-5 bg-white rounded">
+      <div className="container mt-5 shadow p-3 mb-5 bg-white rounded is-max-width-600">
         <h3 className="mb-3">Signup</h3>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId="username">
@@ -90,7 +90,7 @@ class SignupForm extends Component {
             <Form.Label>Re-type Password:</Form.Label>
             <Form.Control type="password" name="password2" value={this.state.password2} onChange={this.handleChange} required />
           </Form.Group>
-          <Button variant="primary" type="submit">Register</Button>
+          <Button variant="primary" type="submit" className="mt-3">Register</Button>
           {this.state.error.length > 0 && (
             <p className="text-danger mt-3 mx-auto">{this.state.error}</p>
           )}
