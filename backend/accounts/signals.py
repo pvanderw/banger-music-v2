@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
-from djoser.signals import user_registered
 
 from accounts.models import UserProfile
 
