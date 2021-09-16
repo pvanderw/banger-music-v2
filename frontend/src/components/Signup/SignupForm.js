@@ -32,44 +32,16 @@ class SignupForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.register(this.state.username, this.state.email, this.state.password2);
-    this.props.history.push('/login');
-
-
-
-
-    // let headers = {'Content-Type': 'application/json'};
-    // let body = JSON.stringify({
-    //   'email': this.state.email,
-    //   'username': this.state.email,
-    //   'password': this.state.password,
-    //   're_password': this.state.re_password,
-    // });
-    // return fetch('http://localhost:8000/api/auth/jwt/create/', {
-    //     method: 'POST',
-    //     headers: headers,
-    //     body: body,
-    //     credentials: 'include',
-    //   })
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(jsonResponse => {
-    //     console.log(jsonResponse);
-    //     const non_field_errors = jsonResponse.non_field_errors;
-    //     const password_errors = jsonResponse.password;
-    //     if (non_field_errors !== undefined  || password_errors !== undefined) {
-    //       this.setState({"errors": [non_field_errors, password_errors]});
-    //     }
-    //     else {
-    //       this.props.history.push('/login/');
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   })
   }
   
   render() {
+    let errorMessage = null;
+    if (this.props.error) {
+        errorMessage = (
+          <p className="text-danger mt-3 mx-auto">{this.props.error}</p>
+        );
+    }
+
     return (
       <div className="container mt-5 shadow p-3 mb-5 bg-white rounded is-max-width-600">
         <h3 className="mb-3">Signup</h3>
@@ -91,9 +63,7 @@ class SignupForm extends Component {
             <Form.Control type="password" name="password2" value={this.state.password2} onChange={this.handleChange} required />
           </Form.Group>
           <Button variant="primary" type="submit" className="mt-3">Register</Button>
-          {this.state.error.length > 0 && (
-            <p className="text-danger mt-3 mx-auto">{this.state.error}</p>
-          )}
+          {errorMessage}
         </Form>
       </div>
     );

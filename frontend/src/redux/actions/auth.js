@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
+import { push } from 'connected-react-router';
 
 export const authStart = () => {
     return {
@@ -7,10 +8,11 @@ export const authStart = () => {
     }
 }
 
-export const authSuccess = (token) => {
+export const authSuccess = (token, user) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         token: token,
+        user: user,
     }
 }
 
@@ -23,9 +25,10 @@ export const authFail = (error) => {
 
 export const logout = () => {
     localStorage.removeItem("JWT");
-    localStorage.removeItem("expirationDate");
     return {
         type: actionTypes.AUTH_LOGOUT,
+        token: null,
+        user: null,
     }
 }
 
@@ -47,14 +50,12 @@ export const authLogin = (username, password) => {
         })
         .then(res => {
             const token = res.data.access;
-            const expirationDate = new Date(new Date().get_time() + 3600);
             localStorage.setItem("JWT", token);
-            localStorage.setItem("expirationDate", expirationDate);
-            dispatch(authSuccess(token));
-            dispatch(checkAuthTimeout(3600));
+            dispatch(authSuccess(token, res.data.user));
+            dispatch(push("/"));
         })
-        .error(error => {
-            dispatch(authFail(error));            
+        .catch(error => {
+            dispatch(authFail("No active account found with the given credentials"));
         });
     }
 }
@@ -69,13 +70,10 @@ export const authSignup = (username, email, password) => {
         })
         .then(res => {
             const token = res.data.access;
-            const expirationDate = new Date(new Date().get_time() + 3600);
             localStorage.setItem("JWT", token);
-            localStorage.setItem("expirationDate", expirationDate);
             dispatch(authSuccess(token));
-            dispatch(checkAuthTimeout(3600));
         })
-        .error(error => {
+        .catch(error => {
             dispatch(authFail(error));            
         });
     }
@@ -85,15 +83,10 @@ export const authCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem("JWT");
         if (token === undefined) {
+            console.log("logging out token null");
             dispatch(logout());
         } else {
-            const expirationDate = localStorage.getItem("expirationDate");
-            if (expirationDate <= new Date()) {
-                dispatch(logout());
-            } else {
-                dispatch(authSuccess(token));
-                dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
-            }
+            dispatch(authSuccess(token));
         }
 
     }

@@ -23,6 +23,7 @@ class LoginSerializer(TokenObtainPairSerializer):
         refresh = self.get_token(self.user)
         data["refresh"] = str(refresh)
         data["access"] = str(refresh.access_token)
+        data["user"] = UserSerializer(self.user).data
         update_last_login(None, self.user)
         return data
 

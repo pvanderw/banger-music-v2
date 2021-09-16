@@ -25,7 +25,6 @@ class UserDetail extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="container w-50 mt-5 shadow p-3 mb-5 bg-white rounded">
         <h3 className="mb-3">Account Info</h3>

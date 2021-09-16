@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Home from './components/Home';
-import LoginForm from './components/Login/LoginForm';
+import { LoginForm } from './components/Login/LoginForm';
 import SignupForm from './components/Signup/SignupForm';
 import UserDetail from './components/User/UserDetail';
 import CustomNav from './components/Navbar/CustomNav';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions/auth';
 import axios from 'axios';
@@ -22,12 +22,13 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <CustomNav {...this.props} />
-
-        <Route path="/" exact component={Home} />
-        <Route path="/login/" component={LoginForm} />
-        <Route path="/signup/" component={SignupForm} />
-        <Route path="/account/" component={UserDetail} />
+        <CustomNav isAuthenticated={this.props.isAuthenticated} />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/login/" component={LoginForm} />
+          <Route path="/signup/" component={SignupForm} />
+          <Route path="/account/" component={UserDetail} />
+        </Switch>
       </BrowserRouter>
     );
   }
@@ -35,7 +36,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.token !== null
+    isAuthenticated: state.token !== undefined
   }
 }
 

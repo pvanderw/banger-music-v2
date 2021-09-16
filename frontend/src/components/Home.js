@@ -16,8 +16,8 @@ class Home extends Component {
     })
     .then(response => response.json())
     .then(data => {
-      var metroArea;
-      var queryString;
+      let metroArea;
+      let queryString;
       try {
         metroArea = data.resultsPage.results.location[0].metroArea;
         queryString = `https://api.songkick.com/api/3.0/metro_areas/${metroArea.id}/calendar.json?per_page=25&apikey=${process.env.REACT_APP_SONGKICK_API_KEY}`;
@@ -40,10 +40,9 @@ class Home extends Component {
   }
 
   render() {
-
     return (
       <div className="container w-50 mt-5 p-3 mb-5 bg-grey rounded">
-        <h1>Events in San Francisco</h1>
+        <h1>Upcoming Events in San Francisco</h1>
         <EventList events={this.state.events} />
       </div>
     );
